@@ -1,0 +1,100 @@
+/* Лёгкие анимации: только opacity + transform (дёшево для GPU) */
+
+@keyframes fx-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fx-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fx-soft-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fx-love-line {
+  from {
+    opacity: 0;
+    transform: translateY(0.1em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Плавные кривые без «пружины» */
+:root {
+  --fx-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-screen-header,
+  .main-screen-content,
+  .main-screen-content-footer,
+  .welcome,
+  .love h2 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .main-screen-header.fx-in-view .main-screen-header-tags-tag {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .one-love__photo,
+  .one-love__tagline {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .one-love__caret {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .main-screen-content-footer-button,
+  .one-love__photo,
+  .location-content__map-btn {
+    transition: none !important;
+  }
+
+  .timing,
+  .timing-title,
+  .timing-content-item,
+  .location-title,
+  .location-content,
+  .location-content__photo-frame {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .main-screen-content-footer-button:hover {
+      transform: none;
+    }
+  }
+}

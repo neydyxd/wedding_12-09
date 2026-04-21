@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.one-love {
+  width: 100%;
+  padding: clamp(2.5rem, 10cqw, 5rem) 0 clamp(3rem, 12cqw, 6rem);
+  box-sizing: border-box;
+  background-color: #ffeadb;
+}
+
+.one-love__card {
+  margin: 0;
+  border: none;
+  width: 100%;
+  max-width: none;
+  background-color: #ffeadb;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.one-love__frame {
+  position: relative;
+  width: 100%;
+  /* место под заголовок, который уезжает вверх */
+  padding-top: clamp(4rem, 18cqw, 9rem);
+}
+
+.one-love__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: clamp(240px, min(92cqw, 52dvh), 520px);
+}
+
+.one-love__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(100%) contrast(1.06);
+  transform-origin: center center;
+  opacity: 0;
+  transform: scale(1.045);
+  transition: filter 0.5s ease;
+}
+
+.one-love.fx-in-view .one-love__photo {
+  animation: fx-soft-zoom-in 0.95s var(--fx-ease-out) 0.12s forwards;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .one-love__media:hover .one-love__photo {
+    filter: grayscale(65%) contrast(1.05);
+  }
+}
+
+.one-love__title {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  top: clamp(-12px, -2cqw, -20px);
+  rotate: -10deg;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 clamp(0.5rem, 2.5cqw, 1rem);
+  box-sizing: border-box;
+  pointer-events: none;
+  color: #b64d1e;
+  /* Pattaya — связной декоративный скрипт с кириллицей, ближе к референсу */
+  font-family: "Monsieur La Doulaise";
+  font-weight: 400;
+  font-size: clamp(3.25rem, 20cqw, 6.75rem);
+  line-height: 0.65;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 22px rgba(255, 234, 219, 0.9);
+}
+
+.one-love__title-measure {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.one-love__title-typed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.one-love__title-line {
+  display: block;
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  line-height: 0.62;
+}
+/* «любовь» начинается правее, чем «Одна» */
+.one-love__title-line--shift {
+  margin-left: clamp(3.25rem, 38cqw, 11rem);
+  margin-right: auto;
+  margin-top: -0.22em;
+}
+
+.one-love__caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.52em;
+  margin-left: 0.08em;
+  vertical-align: -0.05em;
+  background-color: currentColor;
+  border-radius: 1px;
+  animation: one-love-caret-blink 0.9s steps(1, end) infinite;
+}
+
+.one-love__tagline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20%;
+  width: 100%;
+  margin: 0;
+  padding: clamp(1rem, 8cqw, 2.25rem);
+  box-sizing: border-box;
+  font-family: "Tektur", sans-serif;
+  font-size: clamp(0.9375rem, 4.2cqw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: right;
+  color: #b64d1e;
+  text-shadow: 0 1px 14px rgba(255, 234, 219, 0.95);
+  opacity: 0;
+}
+
+.one-love__tagline.fx-in-view {
+  animation: fx-fade-in 0.65s ease-out forwards;
+}
+
+@keyframes one-love-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}

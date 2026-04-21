@@ -1,0 +1,29 @@
+.welcome {
+  margin-top: clamp(2rem, 6vh, 4rem);
+  padding: 0 clamp(1rem, 4cqw, 1.5rem);
+  padding-bottom: clamp(2rem, 6cqw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(1rem, 4cqw, 1.5rem);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.welcome.fx-in-view {
+  animation: fx-fade-up 0.8s var(--fx-ease-out) forwards;
+}
+
+.welcome span {
+  font-size: clamp(0.9375rem, 4.2cqw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 100%;
+}
+
+.welcome-title {
+  text-align: right;
+  font-size: clamp(1.5rem, 8.4cqw, 2.25rem);
+  line-height: 1.15;
+  max-width: 100%;
+}

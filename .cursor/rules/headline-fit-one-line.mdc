@@ -1,0 +1,24 @@
+---
+description: Подгонка заголовка в одну строку под ширину контейнера (без раздувания пробелов)
+alwaysApply: true
+---
+
+# Заголовок «в одну строку на всю ширину»
+
+## Не делать так
+
+- **Не** растягивать слова через `display: flex` + `justify-content: space-between` по отдельным словам — получаются огромные пробелы.
+- **Не** полагаться только на `clamp(...vw)` если нужно **ровно** вписать конкретную строку в **текущую** ширину блока.
+
+## Делать так (эталон в проекте)
+
+См. `src/components/Location/Location.js` и стили `Location.css`.
+
+1. Текст в **одном** `span` внутри заголовка: `display: inline-block`, `white-space: nowrap`.
+2. **Бинарный поиск** по `font-size` (px): максимальный размер, при котором `span.offsetWidth <= maxW`.
+3. `maxW` = ширина контейнера минус горизонтальный padding (`getComputedStyle` + `clientWidth`).
+4. Подписка на **`ResizeObserver`** на контейнер; колбэк **не** вызывать `fit` синхронно — оборачивать в **`requestAnimationFrame`** (и при необходимости coalesce/cancel), как в `Love.js` / `Location.js`, чтобы не ловить предупреждение ResizeObserver loop.
+5. После **`document.fonts.ready`** выполнить пересчёт, если важен метрически шрифт из `@font-face` / Google Fonts.
+6. В CSS оставить у текста **запасной** `font-size` (например `clamp`) до первого кадра JS.
+
+Повторное использование: вынести хук вроде `useFitTextToWidth(containerRef, textRef)` при третьем таком блоке.
