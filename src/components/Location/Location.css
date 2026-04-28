@@ -3,8 +3,8 @@
   max-width: none;
   box-sizing: border-box;
   margin-top: clamp(2rem, 6vh, 4rem);
-  padding-bottom: clamp(3rem, 12cqw, 6.25rem);
-  background-color: #ffeadb;
+  padding-bottom: 0;
+  background-color: var(--color-page);
 }
 
 .location-title {
@@ -28,7 +28,7 @@
   font-weight: 500;
   /* до расчёта в JS — примерный кегль, без огромных пробелов */
   font-size: clamp(0.875rem, 4.2vw, 3rem);
-  color: #b64d1e;
+  color: var(--color-terracotta);
 }
 
 .location-content {
@@ -36,7 +36,7 @@
   width: 100%;
   padding: clamp(1.25rem, 4cqw, 2.25rem);
   box-sizing: border-box;
-  background-color: #b64d1e;
+  background-color: var(--color-terracotta);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -56,12 +56,12 @@
   top: clamp(0.65rem, 2.2cqw, 1.35rem);
   right: clamp(0.65rem, 2.2cqw, 1.35rem);
   margin: 0;
-  font-family: "Tektur", system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: clamp(0.625rem, 1.85cqw, 0.8125rem);
   font-weight: 500;
   letter-spacing: 0.14em;
   line-height: 1;
-  color: #ffeadb;
+  color: var(--color-page);
 }
 
 .location-content__headline {
@@ -73,19 +73,19 @@
 .location-content__line {
   display: inline-block;
   white-space: nowrap;
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-weight: 800;
   /* кегль задаётся в JS под ширину блока */
   font-size: clamp(2.75rem, 21cqw, 7rem);
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: #ffeadb;
+  color: var(--color-page);
 }
 
 .location-content__text {
   font-size: clamp(0.875rem, 3.6cqw, 1rem);
   font-weight: 400;
-  color: #ffeadb;
+  color: var(--color-page);
   text-align: left;
   margin-top: 36px;
 }
@@ -120,17 +120,17 @@
   bottom: clamp(0.875rem, 3.5cqw, 1.75rem);
   box-sizing: border-box;
   padding: clamp(0.75rem, 3cqw, 1.125rem) 1rem;
-  border: 1px solid #ffeadb;
+  border: 1px solid var(--color-page);
   border-radius: 999px;
   background: transparent;
-  font-family: "Tektur", system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: clamp(0.8125rem, 2.8cqw, 1.0625rem);
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: lowercase;
   text-decoration: none;
   text-align: center;
-  color: #ffeadb;
+  color: var(--color-page);
   transition: opacity 0.25s var(--fx-ease-out);
 }
 
@@ -139,6 +139,6 @@
 }
 
 .location-content__map-btn:focus-visible {
-  outline: 2px solid #ffeadb;
+  outline: 2px solid var(--color-page);
   outline-offset: 3px;
 }

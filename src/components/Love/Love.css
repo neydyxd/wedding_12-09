@@ -4,14 +4,14 @@
   margin-top: clamp(-4rem, -15cqw, -2.5rem);
   text-align: center;
   /* Не использовать overflow-x: clip — в паре с visible по оси Y браузер даёт clip по Y и срезает низ крупных букв */
-  color: #b64d1e;
+  color: var(--color-terracotta);
   /* Запас снизу пропорционален вычисленному кеглю (--love-fs задаёт Love.js) */
   padding-bottom: max(2.5rem, calc(var(--love-fs, 80px) * 0.28));
 }
 
 .love h2 {
   margin: 0;
-  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-optical-sizing: auto;
   /* Размер выставляет Love.js по ширине контейнера */

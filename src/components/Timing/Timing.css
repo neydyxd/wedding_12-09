@@ -2,67 +2,152 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: clamp(2rem, 6vh, 4rem);
-  padding: 0 clamp(1rem, 4cqw, 1.5rem);
-  padding-bottom: clamp(2rem, 6cqw, 3rem);
+  padding: 0 clamp(1rem, 4cqw, 1.5rem)
+    clamp(2.5rem, 8cqw, 4rem);
 }
 
-.timing-title {
-  margin: 0;
-  text-align: right;
-  font-size: clamp(2.5rem, 10cqw, 3rem);
-  font-weight: 500;
-  line-height: 1.1;
-  max-width: 100%;
-  color: #b64d1e;
+.timing__head {
+  margin-bottom: clamp(1.25rem, 4cqw, 1.75rem);
   opacity: 0;
   transform: translateY(12px);
 }
 
-.timing.fx-in-view .timing-title {
+.timing__tag {
+  margin: 0 0 clamp(0.5rem, 2cqw, 0.75rem);
+  font-family: var(--font-ui);
+  font-size: var(--eyebrow-size);
+  font-weight: 500;
+  letter-spacing: var(--eyebrow-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+}
+
+.timing__title {
+  margin: 0;
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9cqw, 3rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--color-charcoal);
+}
+
+.timing__panel {
+  position: relative;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 4.5cqw, 1.75rem) clamp(1rem, 3.5cqw, 1.5rem)
+    clamp(1.25rem, 4.5cqw, 1.75rem) clamp(0.85rem, 3cqw, 1.25rem);
+  border: 1px solid rgba(38, 1, 1, 0.1);
+  border-radius: clamp(1.25rem, 5cqw, 2rem);
+  background: var(--color-panel-soft);
+  box-shadow:
+    0 1rem 2.25rem rgba(38, 1, 1, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.35) inset;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.timing__list {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timing__list::before {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  left: calc(clamp(0.85rem, 3cqw, 1.25rem) + 0.625rem);
+  z-index: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: linear-gradient(
+    180deg,
+    rgba(182, 77, 30, 0.35),
+    rgba(182, 77, 30, 0.12)
+  );
+}
+
+.timing__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.65rem, 2.5cqw, 1rem);
+  align-items: start;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.timing__item + .timing__item {
+  margin-top: clamp(1rem, 3.5cqw, 1.35rem);
+  padding-top: clamp(1rem, 3.5cqw, 1.35rem);
+  border-top: 1px solid rgba(182, 77, 30, 0.12);
+}
+
+.timing__rail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 1.25rem;
+  flex-shrink: 0;
+  justify-content: center;
+  padding-top: 0.35em;
+}
+
+.timing__dot {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid var(--color-terracotta);
+  border-radius: 50%;
+  background: var(--color-page);
+  box-shadow: 0 0 0 3px rgba(255, 234, 219, 0.9);
+}
+
+.timing__body {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding-top: 0.05em;
+}
+
+.timing__time {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 6.5cqw, 2.25rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-terracotta);
+}
+
+.timing__label {
+  margin: clamp(0.2rem, 1cqw, 0.35rem) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--color-body);
+}
+
+.timing.fx-in-view .timing__head {
   animation: fx-fade-up 0.72s var(--fx-ease-out) forwards;
 }
 
-.timing-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(0.75rem, 3cqw, 1.125rem);
-  margin-top: clamp(0.75rem, 3cqw, 1.25rem);
+.timing.fx-in-view .timing__panel {
+  animation: fx-fade-up 0.75s var(--fx-ease-out) 0.08s forwards;
 }
 
-.timing-content-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15em;
-  max-width: 100%;
-  opacity: 0;
-  transform: translateY(12px);
-  color: black;
-}
-
-.timing.fx-in-view .timing-content-item:nth-child(1) {
-  animation: fx-fade-up 0.68s var(--fx-ease-out) 0.1s forwards;
-}
-
-.timing.fx-in-view .timing-content-item:nth-child(2) {
-  animation: fx-fade-up 0.68s var(--fx-ease-out) 0.18s forwards;
-}
-
-.timing.fx-in-view .timing-content-item:nth-child(3) {
-  animation: fx-fade-up 0.68s var(--fx-ease-out) 0.26s forwards;
-}
-
-.timing-content-item h3 {
-  margin: 0;
-  font-size: clamp(1.5rem, 6cqw, 2rem);
-  font-weight: 500;
-  line-height: 1.15;
-}
-
-.timing-content-item p {
-  margin: 0;
-  font-size: clamp(0.875rem, 3.6cqw, 1rem);
-  font-weight: 400;
-  line-height: 1.4;
+.timing.fx-in-view .timing__item {
+  animation: fx-fade-up 0.68s var(--fx-ease-out) forwards;
+  animation-delay: calc(0.2s + var(--timing-stagger, 0s));
 }

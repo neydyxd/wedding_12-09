@@ -1,0 +1,101 @@
+.details {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1.5rem, 5cqw, 3rem) 0 clamp(3rem, 10cqw, 5rem);
+  background: var(--color-page);
+  color: var(--color-terracotta);
+}
+
+.details__card {
+  position: relative;
+  min-height: clamp(26rem, 112cqw, 58rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--color-page);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.details.fx-in-view .details__card {
+  animation: fx-fade-up 0.78s var(--fx-ease-out) forwards;
+}
+
+.details__letter {
+  position: absolute;
+  left: clamp(-1.1rem, -2.5cqw, -0.25rem);
+  top: clamp(0.75rem, 3cqw, 1.75rem);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26rem, 138cqw, 66rem);
+  font-weight: 400;
+  line-height: 0.72;
+  letter-spacing: -0.1em;
+  color: var(--color-terracotta);
+  pointer-events: none;
+  user-select: none;
+}
+
+.details__headline {
+  position: absolute;
+  left: 50%;
+  top: clamp(10.25rem, 49cqw, 22rem);
+  z-index: 1;
+  width: min(27cqw, 12rem);
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.details__tag {
+  margin: 0 0 clamp(0.05rem, 1cqw, 0.35rem);
+  font-family: var(--font-ui);
+  font-size: var(--eyebrow-size);
+  font-weight: 500;
+  letter-spacing: var(--eyebrow-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+}
+
+.details__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 10.5cqw, 4.5rem);
+  font-weight: 600;
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  color: var(--color-terracotta);
+}
+
+.details__text {
+  position: absolute;
+  left: clamp(2rem, 7cqw, 3.5rem);
+  right: clamp(2rem, 7cqw, 4rem);
+  bottom: 0;
+  z-index: 1;
+  max-width: 22rem;
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: clamp(0.75rem, 2.8cqw, 1rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0.05em;
+  color: var(--color-terracotta);
+}
+
+@media (min-width: 680px) {
+  .details__card {
+    min-height: 62rem;
+  }
+
+  .details__letter {
+    font-size: 68rem;
+  }
+
+  .details__headline {
+    top: 22.5rem;
+    width: 12rem;
+  }
+
+  .details__text {
+    bottom: 3.5rem;
+  }
+}

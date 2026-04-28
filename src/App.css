@@ -1,6 +1,21 @@
 .container {
   --app-max-width: 800px;
 
+  /* палитра и типографика — одни и те же токены для всех секций */
+  --color-page: #ffeadb;
+  --color-terracotta: #b64d1e;
+  --color-body: #402814;
+  --color-ink: #260101;
+  --color-charcoal: #0d0c00;
+  --color-panel-soft: #fff3e8;
+  --color-cream-on-terra: #ffeadb;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-ui: "Tektur", system-ui, sans-serif;
+  --text-body-sm: clamp(0.8125rem, 3.2cqw, 0.9375rem);
+  --text-body: clamp(0.875rem, 3.6cqw, 1rem);
+  --eyebrow-size: clamp(0.625rem, 1.85cqw, 0.8125rem);
+  --eyebrow-spacing: 0.14em;
+
   width: 100%;
   max-width: var(--app-max-width);
   margin-inline: auto;
@@ -8,7 +23,8 @@
   container-type: inline-size;
   container-name: app;
 
-  background-color: #ffeadb;
+  background-color: var(--color-page);
+  color: var(--color-body);
   overflow-x: clip;
   padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
 }

@@ -77,19 +77,37 @@
 
   .main-screen-content-footer-button,
   .one-love__photo,
-  .location-content__map-btn {
+  .location-content__map-btn,
+  .dress-code__control,
+  .dress-code__dot,
+  .guest-blocks__action {
     transition: none !important;
   }
 
   .timing,
-  .timing-title,
-  .timing-content-item,
+  .timing__head,
+  .timing__panel,
+  .timing__item,
+  .punkts__banner,
+  .punkts__content-item,
+  .wedding-poster__text-back,
   .location-title,
   .location-content,
-  .location-content__photo-frame {
+  .location-content__photo-frame,
+  .dress-code__intro,
+  .dress-code__palette,
+  .dress-code__slider,
+  .details__card,
+  .guest-blocks__card {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .wedding-poster__photo {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
   }
 
   @media (hover: hover) and (pointer: fine) {

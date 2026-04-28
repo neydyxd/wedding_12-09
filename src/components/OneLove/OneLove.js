@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import oneLove from "../../assets/images/one-love.jpg";
+import oneLove from "../../assets/images/we.jpg";
 import "./OneLove.css";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
 
@@ -109,11 +109,11 @@ export default function OneLove() {
               src={oneLove}
               alt="Мы вместе"
             />
-            <p
+            {/* <p
               className={`one-love__tagline ${taglineIn ? "fx-in-view" : ""}`}
             >
               на всю жизнь ...
-            </p>
+            </p> */}
           </div>
         </div>
       </figure>

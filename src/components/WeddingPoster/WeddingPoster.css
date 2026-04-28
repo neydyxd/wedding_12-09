@@ -1,0 +1,121 @@
+.wedding-poster {
+  position: relative;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 360 / 537;
+  min-height: 33.5rem;
+  overflow: hidden;
+  background: var(--color-terracotta);
+  color: var(--color-page);
+}
+
+.wedding-poster__text-back {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-inline: 0.35rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.wedding-poster.fx-in-view .wedding-poster__text-back {
+  animation: fx-fade-up 0.78s var(--fx-ease-out) forwards;
+}
+
+.wedding-poster__word {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  font-family:
+    "Cormorant Garamond",
+    "Playfair Display",
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: clamp(5.75rem, 40cqw, 18rem);
+  font-weight: 300;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-page);
+  user-select: none;
+}
+
+.wedding-poster__word--above {
+  padding-bottom: 0.12em;
+}
+
+.wedding-poster__word--below {
+  justify-content: flex-start;
+  padding-top: 0.12em;
+}
+
+.wedding-poster__line {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.wedding-poster__line-text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* «вылезает» за край; min-width:0 у предков иначе flex раздувает строку и overflow не срабатывает */
+.wedding-poster__line--crop-right .wedding-poster__line-text {
+  transform: translateX(0.32em);
+}
+
+.wedding-poster__line--crop-left .wedding-poster__line-text {
+  transform: translateX(-0.22em);
+}
+
+.wedding-poster__photo {
+  position: absolute;
+  z-index: 1;
+  top: 33.55%;
+  left: 50%;
+  display: block;
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%) contrast(1.08);
+  transform: translateX(-50%) scale(1.04);
+  box-shadow: 0 1.25rem 2.75rem rgba(38, 1, 1, 0.16);
+  opacity: 0;
+}
+
+.wedding-poster.fx-in-view .wedding-poster__photo {
+  animation: wedding-poster-photo-in 0.92s var(--fx-ease-out) 0.1s forwards;
+}
+
+@keyframes wedding-poster-photo-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@container app (min-width: 560px) {
+  .wedding-poster {
+    min-height: 0;
+  }
+}

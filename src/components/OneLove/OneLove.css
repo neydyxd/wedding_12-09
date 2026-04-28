@@ -5,7 +5,7 @@
   width: 100%;
   padding: clamp(2.5rem, 10cqw, 5rem) 0 clamp(3rem, 12cqw, 6rem);
   box-sizing: border-box;
-  background-color: #ffeadb;
+  background-color: var(--color-page);
 }
 
 .one-love__card {
@@ -13,7 +13,7 @@
   border: none;
   width: 100%;
   max-width: none;
-  background-color: #ffeadb;
+  background-color: var(--color-page);
   padding: 0;
   box-sizing: border-box;
 }
@@ -29,7 +29,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  height: clamp(240px, min(92cqw, 52dvh), 520px);
+  height: clamp(200px, min(70cqw, 45dvh), 420px);
 }
 
 .one-love__photo {
@@ -68,7 +68,7 @@
   padding: 0 clamp(0.5rem, 2.5cqw, 1rem);
   box-sizing: border-box;
   pointer-events: none;
-  color: #b64d1e;
+  color: var(--color-terracotta);
   /* Pattaya — связной декоративный скрипт с кириллицей, ближе к референсу */
   font-family: "Monsieur La Doulaise";
   font-weight: 400;
@@ -125,12 +125,12 @@
   margin: 0;
   padding: clamp(1rem, 8cqw, 2.25rem);
   box-sizing: border-box;
-  font-family: "Tektur", sans-serif;
+  font-family: var(--font-ui);
   font-size: clamp(0.9375rem, 4.2cqw, 1.25rem);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-align: right;
-  color: #b64d1e;
+  color: var(--color-terracotta);
   text-shadow: 0 1px 14px rgba(255, 234, 219, 0.95);
   opacity: 0;
 }
