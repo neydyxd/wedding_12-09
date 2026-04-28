@@ -17,7 +17,6 @@ export default function OneLove() {
   const { ref: sectionRef, fx, revealed } = useRevealOnScroll();
   const [typed0, setTyped0] = useState("");
   const [typed1, setTyped1] = useState("");
-  const [taglineIn, setTaglineIn] = useState(false);
 
   useEffect(() => {
     if (!revealed) return;
@@ -26,7 +25,6 @@ export default function OneLove() {
     if (reduced) {
       setTyped0(LINE0);
       setTyped1(LINE1);
-      setTaglineIn(true);
       return;
     }
 
@@ -51,8 +49,6 @@ export default function OneLove() {
       setTyped1(LINE1.slice(0, j));
       if (j < LINE1.length) {
         later(() => tick1(j + 1), MS_PER_CHAR);
-      } else {
-        setTaglineIn(true);
       }
     };
 
@@ -109,11 +105,7 @@ export default function OneLove() {
               src={oneLove}
               alt="Мы вместе"
             />
-            {/* <p
-              className={`one-love__tagline ${taglineIn ? "fx-in-view" : ""}`}
-            >
-              на всю жизнь ...
-            </p> */}
+            {/* <p className="one-love__tagline fx-in-view">на всю жизнь …</p> */}
           </div>
         </div>
       </figure>
