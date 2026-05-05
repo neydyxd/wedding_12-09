@@ -1,7 +1,7 @@
 .main-screen {
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   background-image: url("../../assets/images/main-screen.jpg");
   background-size: cover;
   background-position: 27% center;
@@ -55,7 +55,12 @@
   transform: translateY(14px);
 
   h2 {
-    font-weight: 500;
+    font-family: "Forum", var(--font-display);
+    font-weight: 300;
+    font-size: 1.2em;
+    line-height: 0.86;
+    letter-spacing: 0.025em;
+    color: rgba(255, 234, 219, 0.92);
   }
 
   .main-screen-content-top {
@@ -63,14 +68,17 @@
   }
 
   .main-screen-ampersand {
+    font-family: "Forum", var(--font-display);
+    font-style: italic;
+    font-weight: 300;
     font-size: 0.65em;
     position: relative;
-    top: -0.08em;
+    top: -0.04em;
   }
 
   .main-screen-content-bottom {
     transform: translateX(clamp(1.75rem, 19.5cqw, 5.25rem))
-      translateY(clamp(-1rem, -5.6cqw, -1.5rem));
+      translateY(clamp(-0rem, -5.6cqw, -1.5rem));
   }
 }
 
@@ -103,6 +111,7 @@
 }
 
 .main-screen-content-footer-button {
+    display: block;
     width: calc(100% - clamp(1.5rem, 8cqw, 3rem));
     max-width: 100%;
     box-sizing: border-box;
@@ -111,8 +120,15 @@
     padding: 12px clamp(1rem, 4cqw, 1.5rem);
     text-align: center;
     font-size: clamp(0.8125rem, 3.4cqw, 1rem);
-    cursor: default;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
     transition: opacity 0.2s ease, transform 0.28s var(--fx-ease-out);
+}
+
+.main-screen-content-footer-button:focus-visible {
+  outline: 2px solid var(--color-page);
+  outline-offset: 3px;
 }
 
 @media (hover: hover) and (pointer: fine) {

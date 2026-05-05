@@ -31,7 +31,7 @@
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.04em;
-  color: var(--color-charcoal);
+  color: var(--color-body);
 }
 
 .timing__panel {

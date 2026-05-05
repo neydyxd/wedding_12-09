@@ -2,9 +2,9 @@ import "./Timing.css";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
 
 const EVENTS = [
-  { time: "14:30", label: "сбор гостей" },
-  { time: "15:00", label: "свадебная церемония" },
-  { time: "17:00", label: "праздничный ужин" },
+  { time: "15:30", label: "сбор гостей" },
+  { time: "16:00", label: "свадебная церемония" },
+  { time: "16:30", label: "праздничный ужин" },
 ];
 
 export default function Timing() {

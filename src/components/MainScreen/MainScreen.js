@@ -24,8 +24,13 @@ export default function MainScreen() {
       </div>
       <div className={`main-screen-content-footer ${fx}`}>
         <span className="main-screen-content-footer-date">12.09.2026</span>
-        <span className="main-screen-content-footer-text">Не существует шести или семи <br /> чудес в мире. Есть только <br /> одно: это любовь.</span>
-        <span className="main-screen-content-footer-button"> стать свидетелем чуда</span>
+        <span className="main-screen-content-footer-text">
+          Не существует шести или семи <br /> чудес в мире. Есть только <br />{" "}
+          одно: это любовь.
+        </span>
+        <a className="main-screen-content-footer-button" href="#guest-blocks">
+          стать свидетелем чуда
+        </a>
       </div>
     </div>
   );

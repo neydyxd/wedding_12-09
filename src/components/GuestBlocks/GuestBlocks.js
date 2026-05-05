@@ -28,6 +28,7 @@ export default function GuestBlocks() {
 
   return (
     <section
+      id="guest-blocks"
       className={`guest-blocks ${fx}`}
       ref={ref}
       aria-label="Чат и анкета для гостей"

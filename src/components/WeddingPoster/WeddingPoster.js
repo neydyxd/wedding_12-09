@@ -1,4 +1,4 @@
-import amorantImage from "../../assets/images/amorant.jpg";
+import amorantImage from "../../assets/images/photo-37.jpg";
 import "./WeddingPoster.css";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
 

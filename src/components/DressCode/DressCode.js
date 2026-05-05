@@ -1,6 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./DressCode.css";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
+import one from "../../assets/images/dress-code/1.jpg";
+import two from "../../assets/images/dress-code/2.JPG";
+import three from "../../assets/images/dress-code/3.JPG";
+import four from "../../assets/images/dress-code/4.JPG";
+import five from "../../assets/images/dress-code/5.JPG";
+import six from "../../assets/images/dress-code/6.jpg";
+import seven from "../../assets/images/dress-code/7.JPG";
+import eight from "../../assets/images/dress-code/8.JPG";
+import nine from "../../assets/images/dress-code/9.JPG";
+import ten from "../../assets/images/dress-code/10.JPG";
+import eleven from "../../assets/images/dress-code/11.jpg";
+import twelve from "../../assets/images/dress-code/12.JPG";
+
 
 const PALETTE = [
   { name: "терракота", color: "#B64D1E" },
@@ -12,30 +25,48 @@ const PALETTE = [
 
 const LOOKS = [
   {
-    title: "терракота",
-    note: "акцентный оттенок для платьев, жакетов и аксессуаров",
-    image: "/images/dress-code/look-1.jpg",
+    image: one,
   },
   {
-    title: "чёрный",
-    note: "лаконичная база для костюмов и вечерних образов",
-    image: "/images/dress-code/look-2.jpg",
+    image: two,
   },
   {
-    title: "шоколад",
-    note: "тёплые фактуры, кожа, замша и мягкие ткани",
-    image: "/images/dress-code/look-3.jpg",
+    image: three,
   },
   {
-    title: "песочный",
-    note: "светлая база, которая красиво поддержит осеннюю гамму",
-    image: "/images/dress-code/look-4.jpg",
+    image: twelve,
   },
+  {
+    image: four,
+  },
+  {
+    image: eleven,
+  },
+  {
+    image: five,
+  },
+  {
+    image: six,
+  },
+  {
+    image: seven,
+  },
+  {
+    image: eight,
+  },
+  {
+    image: nine,
+  },
+  {
+    image: ten,
+  },
+
 ];
 
 export default function DressCode() {
   const { ref, fx } = useRevealOnScroll();
   const [activeLook, setActiveLook] = useState(0);
+  const swipeStartRef = useRef(null);
   const currentLook = LOOKS[activeLook];
 
   const goToPrevious = () => {
@@ -46,44 +77,94 @@ export default function DressCode() {
     setActiveLook((index) => (index === LOOKS.length - 1 ? 0 : index + 1));
   };
 
+  const handleSwipeStart = (event) => {
+    swipeStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleSwipeEnd = (event) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+
+    if (!start) {
+      return;
+    }
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35;
+
+    if (!isHorizontalSwipe) {
+      return;
+    }
+
+    if (deltaX < 0) {
+      goToNext();
+    } else {
+      goToPrevious();
+    }
+  };
+
   return (
-    <section className={`dress-code ${fx}`} ref={ref} aria-labelledby="dress-code-title">
+    <section
+      className={`dress-code ${fx}`}
+      ref={ref}
+      aria-labelledby="dress-code-title"
+    >
       <div className="dress-code__intro">
         <p className="dress-code__tag">[ДРЕСС-КОД]</p>
         <h2 className="dress-code__title" id="dress-code-title">
           DRESS CODE
         </h2>
         <p className="dress-code__text">
-          Будем рады, если в ваших образах появятся глубокие природные оттенки:
-          терракота, чёрный, шоколадный, винный и тёплый песочный. Палитра
-          поможет празднику выглядеть цельно и очень красиво на фотографиях.
+          Будем рады, если в ваших образах появятся оттенки: чёрный, шоколадный,
+          винный и тёплый песочный. Палитра поможет празднику выглядеть цельно и
+          очень красиво на фотографиях. А оттенок терракоты можно использовать
+          как акцентный.
         </p>
       </div>
 
-      <div className="dress-code__palette" aria-label="Цветовая палитра дресс-кода">
+      <div
+        className="dress-code__palette"
+        aria-label="Цветовая палитра дресс-кода"
+      >
         {PALETTE.map(({ name, color }) => (
-          <span className="dress-code__swatch" key={name} style={{ "--swatch": color }}>
+          <span
+            className="dress-code__swatch"
+            key={name}
+            style={{ "--swatch": color }}
+          >
             <span>{name}</span>
           </span>
         ))}
       </div>
 
       <div className="dress-code__slider" aria-label="Примеры образов">
-        <div className="dress-code__look">
+        <div
+          className="dress-code__look"
+          onPointerDown={handleSwipeStart}
+          onPointerUp={handleSwipeEnd}
+          onPointerCancel={() => {
+            swipeStartRef.current = null;
+          }}
+        >
           <div
             className="dress-code__look-image"
             style={{ "--look-image": `url("${currentLook.image}")` }}
             role="img"
-            aria-label={`Фотография образа в цвете ${currentLook.title}`}
+            aria-label={`Пример образа ${activeLook + 1}`}
           />
-          <div className="dress-code__look-caption">
-            <span>{currentLook.title}</span>
-            <p>{currentLook.note}</p>
-          </div>
         </div>
 
         <div className="dress-code__controls">
-          <button type="button" className="dress-code__control" onClick={goToPrevious}>
+          <button
+            type="button"
+            className="dress-code__control"
+            onClick={goToPrevious}
+          >
             назад
           </button>
           <div className="dress-code__dots" aria-label="Выбор образа">
@@ -91,14 +172,18 @@ export default function DressCode() {
               <button
                 type="button"
                 className={`dress-code__dot ${index === activeLook ? "is-active" : ""}`}
-                key={look.title}
+                key={index}
                 onClick={() => setActiveLook(index)}
-                aria-label={`Показать образ: ${look.title}`}
+                aria-label={`Показать пример образа ${index + 1}`}
                 aria-current={index === activeLook ? "true" : undefined}
               />
             ))}
           </div>
-          <button type="button" className="dress-code__control" onClick={goToNext}>
+          <button
+            type="button"
+            className="dress-code__control"
+            onClick={goToNext}
+          >
             вперёд
           </button>
         </div>

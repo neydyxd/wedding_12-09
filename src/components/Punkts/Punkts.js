@@ -29,22 +29,6 @@ export default function Punkts() {
         <div className="punkts__content-item">
           <p className="punkts__content-item-number">02</p>
           <p className="punkts__content-item-text">
-            Наш праздник будет окружён изобилием цветов, поэтому приятным
-            комплиментом для нас вместо букета будет бутылка вашего любимого
-            напитка, которую мы откроем на ближайшем празднике.
-          </p>
-        </div>
-        <div className="punkts__content-item">
-          <p className="punkts__content-item-number">03</p>
-          <p className="punkts__content-item-text">
-            Дорогие гости, мы будем благодарны, если вы посвятите нашему дню всё
-            своё внимание и энергию, сможете отдохнуть и развлечься. Поэтому
-            будем признательны, если наш праздник пройдёт в кругу взрослых.
-          </p>
-        </div>
-        <div className="punkts__content-item">
-          <p className="punkts__content-item-number">04</p>
-          <p className="punkts__content-item-text">
             Мы с нетерпением ждём возможности разделить с вами этот особенный
             день! Ваше присутствие — самый ценный подарок для нас.
             <br />

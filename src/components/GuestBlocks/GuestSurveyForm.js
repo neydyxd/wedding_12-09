@@ -5,9 +5,8 @@ const initialForm = {
   fullName: "",
   attendance: "",
   companions: "",
-  diet: "",
+  drinks: [],
   transfer: "",
-  contact: "",
   wishes: "",
 };
 
@@ -23,14 +22,22 @@ const TRANSFER_LABEL = {
   later: "Пока не знаю — напишу в чат",
 };
 
+const DRINK_OPTIONS = [
+  "вино белое",
+  "вино красное",
+  "игристое",
+  "виски",
+  "джин",
+  "безалкогольные напитки",
+];
+
 function buildSummary(values) {
   const lines = [
     `Имя: ${values.fullName}`,
     `Присутствие: ${ATTENDANCE_LABEL[values.attendance] || values.attendance}`,
     values.companions.trim() && `Гости / состав: ${values.companions.trim()}`,
-    values.diet.trim() && `Питание: ${values.diet.trim()}`,
+    values.drinks.length && `Напитки: ${values.drinks.join(", ")}`,
     `Трансфер: ${TRANSFER_LABEL[values.transfer] || values.transfer}`,
-    `Контакт: ${values.contact}`,
     values.wishes.trim() && `Пожелания: ${values.wishes.trim()}`,
   ].filter(Boolean);
   return lines.join("\n");
@@ -41,13 +48,16 @@ function toFormData(values) {
   fd.append("fullName", values.fullName.trim());
   fd.append("attendance", ATTENDANCE_LABEL[values.attendance] || values.attendance);
   fd.append("companions", values.companions.trim());
-  fd.append("diet", values.diet.trim());
+  fd.append("drinks", values.drinks.join(", "));
   fd.append("transfer", TRANSFER_LABEL[values.transfer] || values.transfer);
-  fd.append("contact", values.contact.trim());
   fd.append("wishes", values.wishes.trim());
   fd.append("message", buildSummary(values));
   fd.append("_subject", "Анкета гостя с сайта свадьбы");
   return fd;
+}
+
+function isGoogleAppsScriptEndpoint(endpoint) {
+  return endpoint.includes("script.google.com/macros/");
 }
 
 export default function GuestSurveyForm() {
@@ -65,12 +75,21 @@ export default function GuestSurveyForm() {
     setSubmitError("");
   }, []);
 
+  const toggleDrink = useCallback((drink) => {
+    setValues((v) => ({
+      ...v,
+      drinks: v.drinks.includes(drink)
+        ? v.drinks.filter((item) => item !== drink)
+        : [...v.drinks, drink],
+    }));
+    setSubmitError("");
+  }, []);
+
   const validate = useCallback(() => {
     const next = {};
     if (!values.fullName.trim()) next.fullName = "Укажите, как к вам обращаться";
     if (!values.attendance) next.attendance = "Выберите вариант";
     if (!values.transfer) next.transfer = "Выберите вариант";
-    if (!values.contact.trim()) next.contact = "Нужен телефон или ник в Telegram";
     setErrors(next);
     return Object.keys(next).length === 0;
   }, [values]);
@@ -93,15 +112,26 @@ export default function GuestSurveyForm() {
       setSubmitting(true);
       setSubmitError("");
       try {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: toFormData(values),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          throw new Error(data.error || data.errors?.[0]?.message || `Ошибка ${res.status}`);
+        const body = toFormData(values);
+
+        if (isGoogleAppsScriptEndpoint(endpoint)) {
+          await fetch(endpoint, {
+            method: "POST",
+            mode: "no-cors",
+            body,
+          });
+        } else {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body,
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(data.error || data.errors?.[0]?.message || `Ошибка ${res.status}`);
+          }
         }
+
         setSubmitted(true);
         setSubmittedMode("server");
       } catch (err) {
@@ -125,7 +155,7 @@ export default function GuestSurveyForm() {
         <p className="guest-form__done-text">
           {submittedMode === "server"
             ? "Мы получили вашу анкету. Если понадобится уточнение — напишем вам."
-            : "Анкета заполнена. Чтобы мы получили ответы на почту или в сервис, добавьте URL в guestLinks.js (например Formspree). Пока что ниже — копия ваших ответов: можно скопировать и отправить в чат гостей."}
+            : "Анкета заполнена. Ниже — копия ваших ответов: пока отправка не подключена, её можно отправить нам в чат гостей."}
         </p>
         {submittedMode === "local" ? (
           <pre className="guest-form__summary" tabIndex={0}>
@@ -212,20 +242,25 @@ export default function GuestSurveyForm() {
         />
       </div>
 
-      <div className="guest-form__field">
-        <label className="guest-form__label" htmlFor="guest-diet">
-          Аллергии и пожелания по меню
-        </label>
-        <textarea
-          id="guest-diet"
-          name="diet"
-          className="guest-form__textarea"
-          rows={2}
-          value={values.diet}
-          onChange={(e) => setField("diet", e.target.value)}
-          placeholder="Например: без орехов, вегетарианское стол…"
-        />
-      </div>
+      <fieldset className="guest-form__fieldset">
+        <legend className="guest-form__legend">
+          Что вы предпочитаете из напитков?
+        </legend>
+        <div className="guest-form__radios">
+          {DRINK_OPTIONS.map((drink) => (
+            <label key={drink} className="guest-form__radio-label">
+              <input
+                type="checkbox"
+                name="drinks"
+                value={drink}
+                checked={values.drinks.includes(drink)}
+                onChange={() => toggleDrink(drink)}
+              />
+              <span>{drink}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <fieldset
         className="guest-form__fieldset"
@@ -258,30 +293,6 @@ export default function GuestSurveyForm() {
           </p>
         ) : null}
       </fieldset>
-
-      <div className="guest-form__field">
-        <label className="guest-form__label" htmlFor="guest-contact">
-          Телефон или Telegram <span aria-hidden="true">*</span>
-        </label>
-        <input
-          id="guest-contact"
-          name="contact"
-          className="guest-form__input"
-          type="text"
-          autoComplete="tel"
-          inputMode="text"
-          value={values.contact}
-          onChange={(e) => setField("contact", e.target.value)}
-          placeholder="+7… или @ник"
-          aria-invalid={errors.contact ? "true" : "false"}
-          aria-describedby={errors.contact ? "guest-contact-err" : undefined}
-        />
-        {errors.contact ? (
-          <p id="guest-contact-err" className="guest-form__error" role="alert">
-            {errors.contact}
-          </p>
-        ) : null}
-      </div>
 
       <div className="guest-form__field">
         <label className="guest-form__label" htmlFor="guest-wishes">
