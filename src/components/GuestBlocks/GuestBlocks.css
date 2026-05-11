@@ -43,6 +43,10 @@
   animation: fx-fade-up 0.72s var(--fx-ease-out) 0.1s forwards;
 }
 
+.guest-blocks.fx-in-view .guest-blocks__organizers {
+  animation: fx-fade-up 0.72s var(--fx-ease-out) 0.18s forwards;
+}
+
 .guest-blocks__tag {
   margin: 0 0 clamp(0.45rem, 1.8cqw, 0.65rem);
   font-family: var(--font-ui);
@@ -77,6 +81,119 @@
 
 .guest-blocks__text--form-intro {
   margin-bottom: clamp(0.75rem, 2.5cqw, 1rem);
+}
+
+.guest-blocks__organizers {
+  position: relative;
+  display: grid;
+  gap: clamp(1.1rem, 4cqw, 1.6rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-top: clamp(1rem, 3.5cqw, 1.35rem);
+  padding: clamp(1.35rem, 5cqw, 2rem) clamp(1rem, 4cqw, 1.75rem);
+  border: 1px solid rgba(38, 1, 1, 0.1);
+  border-radius: clamp(1.25rem, 5cqw, 2rem);
+  background:
+    radial-gradient(circle at 92% 12%, rgba(182, 77, 30, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(182, 77, 30, 0.12), transparent 52%),
+    var(--color-panel-soft);
+  box-shadow:
+    0 1.25rem 3rem rgba(38, 1, 1, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.35) inset;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.guest-blocks__organizers::after {
+  content: "BELOVE";
+  position: absolute;
+  right: clamp(0.85rem, 4cqw, 1.75rem);
+  bottom: clamp(0.8rem, 3cqw, 1.25rem);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 12cqw, 5.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(182, 77, 30, 0.13);
+  pointer-events: none;
+}
+
+.guest-blocks__organizers-content,
+.guest-blocks__contacts {
+  position: relative;
+  z-index: 1;
+}
+
+.guest-blocks__text--organizers {
+  max-width: 42rem;
+  margin-bottom: clamp(1rem, 3.2cqw, 1.25rem);
+}
+
+.guest-blocks__agency {
+  display: inline-flex;
+  width: fit-content;
+  border-top: 1px solid rgba(182, 77, 30, 0.28);
+  padding-top: clamp(0.65rem, 2cqw, 0.8rem);
+  font-family: var(--font-ui);
+  font-size: clamp(0.9rem, 3cqw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+}
+
+.guest-blocks__contacts {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.guest-blocks__contacts a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-sizing: border-box;
+  min-height: 4rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(182, 77, 30, 0.22);
+  border-radius: 1rem;
+  background: rgba(255, 250, 245, 0.68);
+  font-family: var(--font-ui);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--color-body);
+  transition:
+    background-color 0.2s var(--fx-ease-out),
+    border-color 0.2s var(--fx-ease-out),
+    color 0.2s var(--fx-ease-out);
+}
+
+.guest-blocks__contacts a:hover {
+  border-color: rgba(182, 77, 30, 0.45);
+  background: rgba(255, 250, 245, 0.9);
+}
+
+.guest-blocks__contacts span {
+  font-size: clamp(0.8125rem, 2.8cqw, 0.9375rem);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.guest-blocks__contacts strong {
+  font-size: clamp(1rem, 3.6cqw, 1.15rem);
+  font-weight: 700;
+  color: var(--color-terracotta);
+}
+
+.guest-blocks__contacts a:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+@media (min-width: 720px) {
+  .guest-blocks__organizers {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
+    align-items: end;
+  }
 }
 
 .guest-blocks__action {

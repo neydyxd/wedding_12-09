@@ -6,6 +6,8 @@ const initialForm = {
   attendance: "",
   companions: "",
   drinks: [],
+  foodIntolerances: "",
+  allergies: "",
   transfer: "",
   wishes: "",
 };
@@ -37,6 +39,9 @@ function buildSummary(values) {
     `Присутствие: ${ATTENDANCE_LABEL[values.attendance] || values.attendance}`,
     values.companions.trim() && `Гости / состав: ${values.companions.trim()}`,
     values.drinks.length && `Напитки: ${values.drinks.join(", ")}`,
+    values.foodIntolerances.trim() &&
+      `Пищевые непереносимости: ${values.foodIntolerances.trim()}`,
+    values.allergies.trim() && `Аллергии: ${values.allergies.trim()}`,
     `Трансфер: ${TRANSFER_LABEL[values.transfer] || values.transfer}`,
     values.wishes.trim() && `Пожелания: ${values.wishes.trim()}`,
   ].filter(Boolean);
@@ -49,6 +54,8 @@ function toFormData(values) {
   fd.append("attendance", ATTENDANCE_LABEL[values.attendance] || values.attendance);
   fd.append("companions", values.companions.trim());
   fd.append("drinks", values.drinks.join(", "));
+  fd.append("foodIntolerances", values.foodIntolerances.trim());
+  fd.append("allergies", values.allergies.trim());
   fd.append("transfer", TRANSFER_LABEL[values.transfer] || values.transfer);
   fd.append("wishes", values.wishes.trim());
   fd.append("message", buildSummary(values));
@@ -261,6 +268,36 @@ export default function GuestSurveyForm() {
           ))}
         </div>
       </fieldset>
+
+      <div className="guest-form__field">
+        <label className="guest-form__label" htmlFor="guest-foodIntolerances">
+          Есть ли пищевые непереносимости?
+        </label>
+        <textarea
+          id="guest-foodIntolerances"
+          name="foodIntolerances"
+          className="guest-form__textarea"
+          rows={2}
+          value={values.foodIntolerances}
+          onChange={(e) => setField("foodIntolerances", e.target.value)}
+          placeholder="Например: лактоза, глютен, орехи"
+        />
+      </div>
+
+      <div className="guest-form__field">
+        <label className="guest-form__label" htmlFor="guest-allergies">
+          Есть ли аллергии, о которых нам важно знать?
+        </label>
+        <textarea
+          id="guest-allergies"
+          name="allergies"
+          className="guest-form__textarea"
+          rows={2}
+          value={values.allergies}
+          onChange={(e) => setField("allergies", e.target.value)}
+          placeholder="Если нет — можно оставить пустым"
+        />
+      </div>
 
       <fieldset
         className="guest-form__fieldset"

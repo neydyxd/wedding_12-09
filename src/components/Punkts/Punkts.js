@@ -1,5 +1,5 @@
 import "./Punkts.css";
-import amorantImage from "../../assets/images/amorant.jpg";
+import amorantImage from "../../assets/images/ruki.JPG";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
 
 export default function Punkts() {
